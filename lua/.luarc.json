@@ -1,0 +1,12 @@
+{
+    "workspace.library": [
+        "/Users/ruta/.local/share/nvim/lazy/neodev.nvim/types/stable",
+        "/opt/homebrew/Cellar/neovim/0.9.0/share/nvim/runtime/lua",
+        "/Users/ruta/Coding/NeovimPlugins/compter.nvim/lua",
+        "${3rd}/luv/library"
+    ],
+    "diagnostics.disable": [
+        "unused-local",
+        "undefined-field"
+    ]
+}
