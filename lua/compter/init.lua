@@ -25,6 +25,7 @@ local getMatched = function(pattern, cursorRow, cursorCol)
     end
 end
 
+-- TODO: support priority
 local config = {
     -- templates for increase and decrease
     -- @param pattern: regex pattern, e.g. [[\d\{2}/\d\{2}/\d\{4}]]
