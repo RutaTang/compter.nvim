@@ -162,7 +162,7 @@ I may continuely add more templates later:
 }
 ```
 
-3. For date format: dd/mm/YYYY
+3. For date format, dd/mm/YYYY:
 
 ```lua
 -- for date format: dd/mm/YYYY
@@ -186,6 +186,55 @@ I may continuely add more templates later:
             ts = ts - 24 * 60 * 60
             return vim.fn.strftime("%d/%m/%Y", ts), true
         end
+    end,
+}
+```
+
+4. For emoji ⭐:
+
+```lua
+-- for emoji ⭐
+{
+    pattern = [[⭐\{1,5}]],
+    priority = 0,
+    increase = function(content)
+        local l = #content / 3 + 1
+        if l > 5 then
+            l = 1
+        end
+        return string.rep("⭐", l), true
+    end,
+    decrease = function(content)
+        local l = #content / 3 - 1
+        if l < 1 then
+            l = 5
+        end
+        return string.rep("⭐", l), true
+    end,
+}
+
+```
+
+5. For circle degree:
+
+```lua
+-- for circle degree
+{
+    pattern = [[\d\{1,3}°]],
+    priority = 0,
+    increase = function(content)
+        local l = tonumber(content:sub(1, -3)) + 1
+        if l >= 360 then
+            l = 0
+        end
+        return string.format("%d°", l), true
+    end,
+    decrease = function(content)
+        local l = tonumber(content:sub(1, -3)) - 1
+        if l < 0 then
+            l = 359
+        end
+        return string.format("%d°", l), true
     end,
 }
 ```
