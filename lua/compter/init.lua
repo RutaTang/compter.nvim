@@ -140,10 +140,16 @@ local operate = function(pattern, op)
         if count == 0 then
             count = 1
         end
-        -- get new content after operate, and check if it is handled
+        -- get new content after count operate, and check if it is handled
         local newContent, handled = op(matched[1])
         if not handled then
             return false
+        end
+        for i = 1, count - 1 do
+            newContent, handled = op(newContent)
+            if not handled then
+                return false
+            end
         end
         -- replace new content
         local newLine = line:sub(1, start - 1) .. newContent .. line:sub(finish + 1)
