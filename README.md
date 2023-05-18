@@ -90,6 +90,8 @@ require("lazy").setup({
 
 ### Useful templates
 
+<details>
+    <summary>Show all templates</summary>
 1. For number:
 
 ```lua
@@ -184,6 +186,8 @@ require("lazy").setup({
     end,
 }
 ```
+</details>
+
 
 ### Provide your own template
 
