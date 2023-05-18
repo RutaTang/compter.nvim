@@ -17,11 +17,14 @@ Use any plugin managers you like, here is an example using lazy.nvim:
 
 ```lua
 require("lazy").setup({
-  { "RutaTang/compter.nvim", config={
-    templates = {
-        -- provide and customize templates
-    }      
-  }},
+  { "RutaTang/compter.nvim", config = function()
+        require("compter").setup({
+            templates = {
+                -- Provide and customize templates
+            }
+        })
+    end,
+  }
 })
 ```
 
@@ -55,28 +58,33 @@ You can use provided templates or add your own.
 1. [Useful template](#useful-templates): use provided template
 2. [Provide your own template](#provide-your-own-template): provide your own template
 
-Add templates to the `config.templates` like this:
+Add templates to the `templates` like this:
 
 ```lua
 require("lazy").setup({
-  { "RutaTang/compter.nvim", config={
-    templates = {
-        -- provide and customize templates
-        {
-            pattern = [[-\?\d\+]],
-            priority = 0,
-            increase = function(content)
-                content = tonumber(content)
-                return content + 1, true
-            end,
-            decrease = function(content)
-                content = tonumber(content)
-                return content - 1, true
-            end,
-        },
-        -- more templates
-    }      
-  }},
+  { "RutaTang/compter.nvim", config=function()
+        require("compter").setup(
+            {
+                templates = {
+                    -- provide and customize templates
+                    {
+                        pattern = [[-\?\d\+]],
+                        priority = 0,
+                        increase = function(content)
+                            content = tonumber(content)
+                            return content + 1, true
+                        end,
+                        decrease = function(content)
+                            content = tonumber(content)
+                            return content - 1, true
+                        end,
+                    },
+                    -- more templates
+                }      
+            }
+        )
+    end
+  },
 })
 ```
 
