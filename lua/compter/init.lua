@@ -25,7 +25,15 @@ local getMatched = function(pattern, cursorRow, cursorCol)
     end
 end
 
--- TODO: support priority
+-- Sort templates by priority, in place
+-- Priority is in descending order
+-- @param templates: templates to sort
+local sortTemplatesByPriority = function(templates)
+    table.sort(templates, function(a, b)
+        return a.priority > b.priority
+    end)
+end
+
 local config = {
     -- templates for increase and decrease
     -- @param pattern: regex pattern, e.g. [[\d\{2}/\d\{2}/\d\{4}]]
@@ -35,6 +43,7 @@ local config = {
         -- for date format: dd/mm/YYYY
         {
             pattern = [[\d\{2}/\d\{2}/\d\{4}]],
+            priority = 100,
             increase = function(content)
                 local ts = vim.fn.strptime("%d/%m/%Y", content)
                 if ts == 0 then
@@ -54,9 +63,52 @@ local config = {
                 end
             end,
         },
+        -- for lowercase alphabet
+        {
+            pattern = [[\l]],
+            priority = 0,
+            increase = function(content)
+                local ansiCode = string.byte(content) + 1
+                if ansiCode > string.byte("z") then
+                    ansiCode = string.byte("a")
+                end
+                local char = string.char(ansiCode)
+                return char, true
+            end,
+            decrease = function(content)
+                local ansiCode = string.byte(content) - 1
+                if ansiCode < string.byte("a") then
+                    ansiCode = string.byte("z")
+                end
+                local char = string.char(ansiCode)
+                return char, true
+            end,
+        },
+        -- for uppercase alphabet
+        {
+            pattern = [[\u]],
+            priority = 0,
+            increase = function(content)
+                local ansiCode = string.byte(content) + 1
+                if ansiCode > string.byte("Z") then
+                    ansiCode = string.byte("A")
+                end
+                local char = string.char(ansiCode)
+                return char, true
+            end,
+            decrease = function(content)
+                local ansiCode = string.byte(content) - 1
+                if ansiCode < string.byte("A") then
+                    ansiCode = string.byte("Z")
+                end
+                local char = string.char(ansiCode)
+                return char, true
+            end,
+        },
         -- for number
         {
             pattern = [[-\?\d\+]],
+            priority = 0,
             increase = function(content)
                 content = tonumber(content)
                 return content + 1, true
@@ -135,6 +187,8 @@ local setup = function(opts)
     )
     -- merge templates
     config = vim.tbl_deep_extend("force", config, opts or {})
+    -- sort templates by priority
+    sortTemplatesByPriority(config.templates)
 end
 
 return {
