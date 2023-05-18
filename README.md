@@ -53,7 +53,12 @@ For example:
 
 ## Templates
 
-Add templates to the `templates` like this:
+You can use provided templates or add your own.
+
+1. [Useful template](#useful-templates): use provided template
+2. [Provide your own template](#provide-your-own-template): provide your own template
+
+After you choose or wirte templates, add templates to the `templates` like this:
 
 ```lua
 require("lazy").setup({
@@ -82,12 +87,6 @@ require("lazy").setup({
   },
 })
 ```
-
-You can use provided templates or add your own.
-
-1. [Useful template](#useful-templates): use provided template
-2. [Provide your own template](#provide-your-own-template): provide your own template
-
 
 ### Useful templates
 
