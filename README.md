@@ -19,7 +19,7 @@ require("lazy").setup({
 })
 ```
 
-Compter.nvim does not embed built-in template, you can choose and add provided templates from [Useful template](### Useful templates) or [Provide your own template](### Provide your own template)
+Compter.nvim does not embed built-in template, you can choose and add provided templates from [Useful template](#useful-templates) or [Provide your own template](#provide-your-own-template)
 
 ## Usage 
 
@@ -46,8 +46,8 @@ For example:
 
 You can use provided templates or add your own.
 
-1. [Useful template](### Useful templates): use provided template
-2. [Provide your own template](### Provide your own template): provide your own template
+1. [Useful template](#useful-templates): use provided template
+2. [Provide your own template](#provide-your-own-template): provide your own template
 
 ### Useful templates
 
