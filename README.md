@@ -66,7 +66,7 @@ require("lazy").setup({
         require("compter").setup(
             {
                 templates = {
-                    -- provide and customize templates
+                    -- example template
                     {
                         pattern = [[-\?\d\+]],
                         priority = 0,
