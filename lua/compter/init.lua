@@ -6,19 +6,19 @@
 local getMatched = function(pattern, cursorRow, cursorCol)
     local regex = vim.regex(pattern)
     local originalLine = vim.fn.getline(cursorRow)
-    local searchStart = 0
+    local searchStart = 1
     while true do
-        local line = string.sub(originalLine, searchStart + 1)
+        local line = string.sub(originalLine, searchStart)
         local mStart, mEnd = regex:match_str(line) -- index from 0
         if mStart == nil or mEnd == nil then
             return nil
         end
-        -- update mStart and mEnd with considering searchStart
+        -- update mStart and mEnd while considering searchStart
         mStart = mStart + searchStart
-        mEnd = mEnd + searchStart
+        mEnd = mEnd + searchStart -- exclusive
         -- check if cursor in matched range
-        if cursorCol >= mStart and cursorCol <= mEnd then
-            return { string.sub(originalLine, mStart + 1, mEnd), mStart + 1, mEnd }
+        if cursorCol >= mStart and cursorCol < mEnd then
+            return { string.sub(originalLine, mStart, mEnd - 1), mStart, mEnd - 1 }
         end
         -- update searchStart
         searchStart = mEnd
