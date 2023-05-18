@@ -90,6 +90,8 @@ require("lazy").setup({
 
 ### Useful templates
 
+I may continuely add more templates later:
+
 <details>
     <summary>Show all templates</summary>
 
