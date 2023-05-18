@@ -13,13 +13,13 @@ Use any plugin managers you like, here is an example using lazy.nvim:
 require("lazy").setup({
   { "RutaTang/compter.nvim", config={
     templates = {
-        -- provide and customize your own template
+        -- provide and customize templates
     }      
   }},
 })
 ```
 
-Compter.nvim does not embed built-in template, you can choose and add provided templates from [Useful template](#useful-templates) or [Provide your own template](#provide-your-own-template)
+Compter.nvim **does not embed built-in templates**, you can choose and add provided templates from [Useful template](#useful-templates) or [Provide your own template](#provide-your-own-template)
 
 ## Usage 
 
@@ -48,6 +48,31 @@ You can use provided templates or add your own.
 
 1. [Useful template](#useful-templates): use provided template
 2. [Provide your own template](#provide-your-own-template): provide your own template
+
+Add templates to the `config.templates` like this:
+
+```lua
+require("lazy").setup({
+  { "RutaTang/compter.nvim", config={
+    templates = {
+        -- provide and customize templates
+        {
+            pattern = [[-\?\d\+]],
+            priority = 0,
+            increase = function(content)
+                content = tonumber(content)
+                return content + 1, true
+            end,
+            decrease = function(content)
+                content = tonumber(content)
+                return content - 1, true
+            end,
+        },
+        -- more templates
+    }      
+  }},
+})
+```
 
 ### Useful templates
 
@@ -189,27 +214,4 @@ A simple example is like:
 }
 ```
 
-You should include your template in `config.templates` like this:
 
-```lua
-require("lazy").setup({
-  { "RutaTang/compter.nvim", config={
-    templates = {
-        -- provide and customize your own template
-        {
-            pattern = [[-\?\d\+]],
-            priority = 0,
-            increase = function(content)
-                content = tonumber(content)
-                return content + 1, true
-            end,
-            decrease = function(content)
-                content = tonumber(content)
-                return content - 1, true
-            end,
-        },
-        -- more templates
-    }      
-  }},
-})
-```
