@@ -40,4 +40,68 @@ For example:
 
 ## Provide your own template
 
+A template must be as following structure:
 
+```lua
+{
+    pattern = ..., -- regex pattern to be matched, e.g. [[\d]]
+    priority = 0, -- priority, template with higher priority will be matched first
+    -- How to increase content (<C-a>)
+    -- @param content: content is the matched text
+    -- @return newContent, handled: handled means whether continue to matche other templates 
+    increase = function(content) 
+        ...
+        return newContent, true
+    end,
+    -- How to decrease content (<C-x>)
+    -- param and return is same as `increase` above
+    decrease = function(content)
+        ...
+        return newContent, true
+    end,
+},
+
+```
+
+A simple example is like:
+
+```lua
+-- this template match numbers
+{
+    pattern = [[-\?\d\+]],
+    priority = 0,
+    increase = function(content)
+        content = tonumber(content)
+        return content + 1, true
+    end,
+    decrease = function(content)
+        content = tonumber(content)
+        return content - 1, true
+    end,
+}
+```
+
+You should include your template in `config.templates` like this:
+
+```lua
+require("lazy").setup({
+  { "RutaTang/compter.nvim", config={
+    templates = {
+        -- provide and customize your own template
+        {
+            pattern = [[-\?\d\+]],
+            priority = 0,
+            increase = function(content)
+                content = tonumber(content)
+                return content + 1, true
+            end,
+            decrease = function(content)
+                content = tonumber(content)
+                return content - 1, true
+            end,
+        },
+        -- more templates
+    }      
+  }},
+})
+```
