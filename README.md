@@ -92,6 +92,7 @@ require("lazy").setup({
 
 <details>
     <summary>Show all templates</summary>
+
 1. For number:
 
 ```lua
