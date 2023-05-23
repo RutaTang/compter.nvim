@@ -88,6 +88,7 @@ local increase = function()
             return
         end
     end
+    vim.cmd("normal!" .. (vim.v.count == 0 and 1 or vim.v.count) .. "")
 end
 
 local decrease = function()
@@ -96,6 +97,7 @@ local decrease = function()
             return
         end
     end
+    vim.cmd("normal!" .. (vim.v.count == 0 and 1 or vim.v.count) .. "")
 end
 
 local setup = function(opts)
