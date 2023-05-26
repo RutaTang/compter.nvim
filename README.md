@@ -292,7 +292,7 @@ A simple example is like:
 }
 ```
 
-## How to conrtibute
+## How to contribute
 
 Since the plugin is in its very early stage, I do not accpet PRs to **plugin codes** and **templates** for now and still very appreciate for your willing to contribute. I may accpet PRs later when it's ready. 
 
