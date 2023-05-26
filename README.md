@@ -18,6 +18,7 @@ By default, Neovim enable you to use `<C-a>` and `<C-x>` to increase and descrea
 3. [Templates](#templates)
     1. [Useful template](#useful-templates)
     2. [Provide your own template](#provide-your-own-template)
+4. [How to contribute](#how-to-contribute)
 
 ## Installnation
 
