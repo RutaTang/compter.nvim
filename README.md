@@ -15,10 +15,11 @@ By default, Neovim enable you to use `<C-a>` and `<C-x>` to increase and descrea
 
 1. [Installnation](#installnation)
 2. [Usage](#usage)
-3. [Templates](#templates)
+3. [Configuration](#configuration)
+4. [Templates](#templates)
     1. [Useful template](#useful-templates)
     2. [Provide your own template](#provide-your-own-template)
-4. [How to contribute](#how-to-contribute)
+5. [How to contribute](#how-to-contribute)
 
 ## Installnation
 
@@ -27,10 +28,24 @@ Use any plugin managers you like, here is an example using lazy.nvim:
 ```lua
 require("lazy").setup({
   { "RutaTang/compter.nvim", config = function()
+        require("compter").setup({})
+    end,
+  }
+})
+```
+
+## Configuration
+
+```lua
+
+require("lazy").setup({
+  { "RutaTang/compter.nvim", config = function()
         require("compter").setup({
+            -- Provide and customize templates
             templates = {
-                -- Provide and customize templates
-            }
+            },
+            -- Whether fallback to nvim-built-in increase and decrease operation, default to false
+            fallback = false 
         })
     end,
   }

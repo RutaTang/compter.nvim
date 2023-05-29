@@ -40,6 +40,8 @@ local config = {
     -- @param increase: function(content) -> newContent, handled, e.g. function(content) return content + 1, true end
     -- @param decrease: function(content) -> newContent, handled, e.g. function(content) return content - 1, true end
     templates = {},
+    -- whether fallback to default/nvim-built-in operation
+    fallback = false,
 }
 
 -- Operate on matched content
@@ -82,11 +84,32 @@ local operate = function(pattern, op)
     return false
 end
 
+-- Fall back to default operation (Nvim built-in operation)
+-- @param direction: increase or decrease
+local defaultOperation = function(direction)
+    local count = vim.v.count
+    if count == 0 then
+        count = 1
+    end
+    -- feed count times <C-a> or <C-x>
+    local key
+    if direction == "increase" then
+        key = "<C-a>"
+    else
+        key = "<C-x>"
+    end
+    key = vim.api.nvim_replace_termcodes(key, true, false, true)
+    vim.api.nvim_feedkeys(string.rep(key, count), "n", false)
+end
+
 local increase = function()
     for _, template in ipairs(config.templates) do
         if operate(template.pattern, template.increase) then
             return
         end
+    end
+    if config.fallback then
+        defaultOperation("increase")
     end
 end
 
@@ -95,6 +118,9 @@ local decrease = function()
         if operate(template.pattern, template.decrease) then
             return
         end
+    end
+    if config.fallback then
+        defaultOperation("decrease")
     end
 end
 
