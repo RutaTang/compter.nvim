@@ -99,7 +99,7 @@ local defaultOperation = function(direction)
         key = "<C-x>"
     end
     key = vim.api.nvim_replace_termcodes(key, true, false, true)
-    vim.api.nvim_feedkeys(string.rep(key, count), "n", false)
+    vim.api.nvim_feedkeys(key .. count, "n", false)
 end
 
 local increase = function()
