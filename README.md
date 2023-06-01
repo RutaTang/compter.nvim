@@ -56,6 +56,8 @@ Compter.nvim **does not embed built-in templates**, you can choose and add provi
 
 ## Usage 
 
+**Note: You need either add at least one template or enable fallback to make it work. **
+
 Compter.nvim has already overrided `<C-a>` and `<C-x>` keymappings. What you need to do to use this plugin is just to use `<C-a>` and `<C-x>` as usual. Both `<C-a>` and `<C-x>` support intergation with count, which means you can use like `100<C-a>` and `100<C-x>`.
 
 For example:
