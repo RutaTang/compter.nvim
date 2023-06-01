@@ -262,6 +262,39 @@ I may continuely add more templates later:
     end,
 }
 ```
+
+6. For boolean:
+
+```lua
+-- for boolean
+{
+    pattern = [[\<\(true\|false\|TRUE\|FALSE\|True\|False\)\>]],
+    priority = 100,
+    increase = function(content)
+        local switch = {
+            ["true"] = "false",
+            ["false"] = "true",
+            ["True"] = "False",
+            ["False"] = "True",
+            ["TRUE"] = "FALSE",
+            ["FALSE"] = "TRUE",
+        }
+        return switch[content], true
+    end,
+    decrease = function(content)
+        local switch = {
+            ["true"] = "false",
+            ["false"] = "true",
+            ["True"] = "False",
+            ["False"] = "True",
+            ["TRUE"] = "FALSE",
+            ["FALSE"] = "TRUE",
+        }
+        return switch[content], true
+    end,
+}
+```
+
 </details>
 
 
